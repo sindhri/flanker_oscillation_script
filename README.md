@@ -6,7 +6,7 @@ The input files have signal for each frequency, time point and channel for each 
 <tr>
 <th>File</th>
 <th>Description</th>
-<th>Image Example</th>
+<th>Example Image</th>
 </tr>
   
 <tr>
