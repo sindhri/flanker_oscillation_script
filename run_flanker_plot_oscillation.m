@@ -13,6 +13,7 @@
 % 100-300 ms
 % alpha posterior: [71, 76, 70, 75, 83, 66, 84], resp 200-500 ms
 % alpha left posterior: [52, 59, 60, 63, 66], stim 300-500 ms
+% added centerl 129, 7, 6, 106
 
 % fullhead oscillation parameters
 %baseline = 700;
@@ -32,14 +33,14 @@ addpath('/Users/wu/Documents/MATLAB/work/toolbox/eeglab14_0_0b/sample_locs');
 addpath(genpath('/Users/wu/Documents/MATLAB/work/toolbox/eeglab14_0_0b/functions'));
 addpath(genpath('/Users/wu/Documents/MATLAB/work/toolbox/eeglab14_0_0b/plugins'));
 
-coi(1).channel = [25, 8, 21, 14, 22, 15, 9, 16, 18, 10];
-coi(1).name = 'inferior_frontal';
+%coi(1).channel = [25, 8, 21, 14, 22, 15, 9, 16, 18, 10];
+%coi(1).name = 'inferior_frontal';
 
-coi(2).channel = [71, 76, 70, 75, 83, 66, 84];
-coi(2).name = 'posterior';
+%coi(2).channel = [71, 76, 70, 75, 83, 66, 84];
+%coi(2).name = 'posterior';
 
-%coi(3).channel = [52, 59, 60, 63, 66];
-%coi(3).name = 'left_posterior';
+coi(1).channel = [129, 7, 6, 106];
+coi(1).name = 'central';
 
 id_type = 1;
 oscillation_type = 'ERSP';
@@ -55,4 +56,19 @@ for i = 1:length(coi)
         end
 end
 
+% plot full-head oscillation over a period of time
+% Response theta average head plot 200-500 ms
+% Response theta average head plot 100-200 ms
+% Stim theta average head plot 300-500 ms
+
+load('saved_ERSP_ITC/resp_ERSP_theta.mat');
+time_to_plot = [100,200;...
+    200,500];
+foi_selected = ITC_select_2cond_foi_ERSP(resp_ERSP_theta, [3,2]);
+ITC_fullhead_heatmap_average_foi_ERSP(foi_selected,time_to_plot,0);
+
+load('saved_ERSP_ITC/stim_ERSP_theta.mat');
+time_to_plot = [300,500];
+foi_selected = ITC_select_2cond_foi_ERSP(stim_ERSP_theta, [1,2]);
+ITC_fullhead_heatmap_average_foi_ERSP(foi_selected,time_to_plot,0);
 
